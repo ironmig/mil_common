@@ -204,7 +204,8 @@ class BagToLabelMe(object):
         for topic in bag.topics:
             path = self._annotations_directory(bag.name, topic)
             if not os.path.isdir(path):
-                continue
+                self._print('No labels for bag. Skipping')
+                return
             labels[topic] = {}
             for filename in os.listdir(path):
                 msg = self.label_to_msg(os.path.join(path, filename))
